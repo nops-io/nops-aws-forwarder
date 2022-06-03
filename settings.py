@@ -18,8 +18,8 @@ def get_env_var(envvar, default, boolean=False):
 
 NOPS_API_KEY = ""
 NOPS_NO_SSL = False
-NOPS_PORT = "80"
-NOPS_SKIP_SSL_VALIDATION = False
+NOPS_PORT = "443"
+NOPS_SKIP_SSL_VALIDATION = True
 NOPS_URL = "app.nops.io"
 NOPS_FORWARDER_VERSION = "1.0.0"
 
