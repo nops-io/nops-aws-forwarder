@@ -15,10 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v3
-
       - name: Setup Python 3.9
         uses: actions/setup-python@v3
         with:
