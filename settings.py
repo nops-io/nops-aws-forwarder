@@ -23,7 +23,16 @@ NOPS_SKIP_SSL_VALIDATION = True
 NOPS_URL = "app.nops.io"
 NOPS_FORWARDER_VERSION = "1.0.0"
 
-CT_EVENT_TYPES = ["RunInstances", "StartInstances", "StopInstances", "TerminateInstances", "ModifyReservedInstances"]
+CT_EVENT_TYPES = [
+    "RunInstances", 
+    "StartInstances", 
+    "StopInstances", 
+    "TerminateInstances", 
+    "PurchaseReservedInstancesOffering",
+    "DeleteQueuedReservedInstances",
+    "ModifyReservedInstances",
+    "AcceptReservedInstancesExchangeQuote"
+]
 
 
 if "NOPS_API_KEY" in os.environ:
