@@ -7,7 +7,7 @@ from logs import forward_logs
 def test_forward_logs():
     rsp1 = responses.Response(
         responses.POST,
-        "https://app.nops.io:80/svc/event_collector/v1/cloudtrail_event_collector",
+        "https://app.nops.io:443/svc/event_collector/v1/cloudtrail_event_collector",
         status=200,
     )
 

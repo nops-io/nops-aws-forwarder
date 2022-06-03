@@ -15,7 +15,16 @@ Parameters:
   pCloudtrailBucketName:
     Type: String
     Description: S3 Bucket name which contains cloudtrail logs.
-
+  pMemorySize:
+    Type: Number
+    Default: 1024
+    MinValue: 128
+    MaxValue: 3008
+    Description: Memory size for the nOps Forwarder Lambda function
+  pTimeout:
+    Type: Number
+    Default: 120
+    Description: Timeout for the nOps Forwarder Lambda function
 
 Resources:
   rnopsLambdaForwarderExecutionRole: 
@@ -64,12 +73,15 @@ Resources:
       Handler: "lambda_function.lambda_handler"
       Role: !GetAtt rnopsLambdaForwarderExecutionRole.Arn
       Runtime: "python3.9"
-      Timeout: 60
+      MemorySize:
+          Ref: pMemorySize
+      Timeout:
+        Ref: pTimeout
       FunctionName: "nops-aws-forwarder"
       Environment:
         Variables:
           NOPS_API_KEY: !Ref pnOpsApiKey
-          NOPS_LOG_LEVEL: 'DEBUG'
+          NOPS_LOG_LEVEL: 'INFO'
     DependsOn: 
       - rnopsLambdaForwarderExecutionRole
 
