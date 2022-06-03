@@ -19,10 +19,8 @@ jobs:
         run: |
           make package
 
-        env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
-
       - name: Release package
         run: |
-          release.sh
-
+          ./release.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
