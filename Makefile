@@ -1,11 +1,14 @@
+CURRENT_VERSION := $(shell grep NOPS_FORWARDER_VERSION settings.py | awk -v RS='\"' '!(NR%2)')
+PACKAGE_NAME := "nops-aws-forwarder-deployment-package-$(CURRENT_VERSION).zip"
+
 package:
+	mkdir -p ./.package/
 	rm -rf venv
 	python3 -m venv venv
 	. venv/bin/activate; pip install -r requirements.txt
-	cd venv/lib/python3.9/site-packages; zip -r ../../../../nops-aws-forwarder-deployment-package.zip .
-	zip -g nops-aws-forwarder-deployment-package.zip *.py
+	cd venv/lib/python3.9/site-packages; zip -r ../../../../.package/nops-aws-forwarder-deployment-package-$(CURRENT_VERSION).zip .
+	zip -g "./.package/nops-aws-forwarder-deployment-package-$(CURRENT_VERSION).zip" *.py
 	rm -rf venv
-
 
 test:
 	rm -rf venv
