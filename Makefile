@@ -6,7 +6,7 @@ package:
 	rm -rf venv
 	python3 -m venv venv
 	. venv/bin/activate; pip install -r requirements.txt
-	cd venv/lib/python3.9/site-packages; zip -r ../../../../.package/nops-aws-forwarder-deployment-package-$(CURRENT_VERSION).zip .
+	cd venv/lib/python/site-packages; zip -r ../../../../.package/nops-aws-forwarder-deployment-package-$(CURRENT_VERSION).zip .
 	zip -g "./.package/nops-aws-forwarder-deployment-package-$(CURRENT_VERSION).zip" *.py
 	rm -rf venv
 
