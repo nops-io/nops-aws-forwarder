@@ -2,17 +2,20 @@
 
 Forward event from AWS CT into nOps
 
+## Prerequisites
+- AWS Cloudtrail with s3 bucket for cloudtrail logs must be configured before deploying this stack.
+- Region for AWS Cloudtrail and nOps-aws-forwarder should be same.
 ## Installation
 
 
 ### CloudFormation
 
-[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=datadog-forwarder&templateURL=https://github.com/nops-io/nops-aws-forwarder/raw/deploy/cf_deploy/lambda-forwarder-cloudformation-template.yaml)
+[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=nops-aws-forwarder&templateURL=https://nops-cloudformation-template.s3.us-west-2.amazonaws.com/lambda-forwarder-cloudformation-template.yaml)
 
 1. Log into your admin AWS account/role and deploy the CloudFormation Stack with the button above.
-2. Fill in `pnOpsApiKey`, `pLambdaPackageS3BucketName`, `pLambdaPackageFileName`, `pCloudtrailBucketName`, . All other parameters are optional.
+2. Fill in `pnOpsApiKey`, `pCTForwarderReleaseVersion`, `pCloudtrailBucketName`, . All other parameters are optional.
 3. Click **Create stack**, and wait for the creation to complete.
-4. Find the installed forwarder Lambda function under the stack's "Resources" tab with logical ID `Forwarder`.
+4. Find the installed forwarder Lambda function under the stack's "Resources" tab with logical ID `rLambdaForwarder`.
 5. Set up triggers to the installed Forwarder
 6. Repeat the above steps in another region if you operate in multiple AWS regions.
 

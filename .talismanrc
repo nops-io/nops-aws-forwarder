@@ -1,4 +1,6 @@
 fileignoreconfig:
+- filename: cf_deploy/lambda-forwarder-cloudformation-template.yaml
+  checksum: d45f0db73cd53f64c9b2fc99f0fefd344e80406f30a78f75ec9cdd3c4b1e94d5
 - filename: deploy/lambda-forwarder-cloudformation-template.yaml
   checksum: d980bed64edef508821d9e2658e44f13f5251bccc1e1614a060fbdeca8b00bc9
 version: "1.0"
