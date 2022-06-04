@@ -10,7 +10,7 @@ Forward event from AWS CT into nOps
 
 ### CloudFormation
 
-[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=nops-aws-forwarder&templateURL=https://github.com/nops-io/nops-aws-forwarder/raw/deploy/cf_deploy/lambda-forwarder-cloudformation-template.yaml)
+[![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)](https://console.aws.amazon.com/cloudformation/home#/stacks/create/review?stackName=nops-aws-forwarder&templateURL=https://nops-cloudformation-template.s3.us-west-2.amazonaws.com/lambda-forwarder-cloudformation-template.yaml)
 
 1. Log into your admin AWS account/role and deploy the CloudFormation Stack with the button above.
 2. Fill in `pnOpsApiKey`, `pCTForwarderReleaseVersion`, `pCloudtrailBucketName`, . All other parameters are optional.
