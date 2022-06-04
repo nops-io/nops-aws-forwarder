@@ -21,4 +21,3 @@ jobs:
       - name: Run Python unit tests
         run: |
           make test
-

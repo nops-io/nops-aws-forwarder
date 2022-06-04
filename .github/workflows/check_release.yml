@@ -19,12 +19,3 @@ jobs:
       - name: Check release duplication
         run: |
           ./deploy_scripts/check_release.sh
-
-      - name: Setup Python 3.9
-        uses: actions/setup-python@v3
-        with:
-          python-version: 3.9
-
-      - name: Run Python unit tests
-        run: |
-          make test

@@ -13,7 +13,6 @@ jobs:
       packages: write
       id-token: write
 
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -31,7 +30,7 @@ jobs:
         run: |
           make package
 
-     - name: configure aws credentials
+      - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.NOPS_ROLE }}
