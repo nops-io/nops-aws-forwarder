@@ -1,0 +1,23 @@
+name: Check-AWS-Release
+
+on: 
+  push:
+    branches: ['master']
+
+jobs:
+  check-aws:
+    name: Check-AWS-Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+
+    steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::202279780353:role/Publish_CF_From_Github_To_S3
+          role-session-name: GitHubActionsDeployCF
+          aws-region: us-west-2
+
