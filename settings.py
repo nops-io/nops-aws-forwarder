@@ -24,14 +24,14 @@ NOPS_URL = "app.nops.io"
 NOPS_FORWARDER_VERSION = "1.0.1"
 
 CT_EVENT_TYPES = [
-    "RunInstances", 
-    "StartInstances", 
-    "StopInstances", 
-    "TerminateInstances", 
+    "RunInstances",
+    "StartInstances",
+    "StopInstances",
+    "TerminateInstances",
     "PurchaseReservedInstancesOffering",
     "DeleteQueuedReservedInstances",
     "ModifyReservedInstances",
-    "AcceptReservedInstancesExchangeQuote"
+    "AcceptReservedInstancesExchangeQuote",
 ]
 
 

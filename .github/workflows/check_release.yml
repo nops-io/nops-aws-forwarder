@@ -1,12 +1,12 @@
-name: Release
+name: Check Release
 
 on: 
-  push:
-    branches: ['deploy']
-
+  pull_request:
+    branches:
+      - 'deploy'
 jobs:
-  release-new-package-version:
-    name: Release
+  check-release-pr:
+    name: Check Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -16,6 +16,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Check release duplication
+        run: |
+          ./deploy_scripts/check_release.sh
+
       - name: Setup Python 3.9
         uses: actions/setup-python@v3
         with:
@@ -24,13 +28,3 @@ jobs:
       - name: Run Python unit tests
         run: |
           make test
-
-      - name: Build package
-        run: |
-          make package
-
-      - name: Release package
-        run: |
-          ./deploy_scripts/release.sh
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
