@@ -21,17 +21,17 @@ NOPS_NO_SSL = False
 NOPS_PORT = "443"
 NOPS_SKIP_SSL_VALIDATION = True
 NOPS_URL = "app.nops.io"
-NOPS_FORWARDER_VERSION = "1.0.1"
+NOPS_FORWARDER_VERSION = "1.0.4"
 
 CT_EVENT_TYPES = [
-    "RunInstances", 
-    "StartInstances", 
-    "StopInstances", 
-    "TerminateInstances", 
+    "RunInstances",
+    "StartInstances",
+    "StopInstances",
+    "TerminateInstances",
     "PurchaseReservedInstancesOffering",
     "DeleteQueuedReservedInstances",
     "ModifyReservedInstances",
-    "AcceptReservedInstancesExchangeQuote"
+    "AcceptReservedInstancesExchangeQuote",
 ]
 
 

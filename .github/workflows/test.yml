@@ -1,9 +1,10 @@
-name: Tests
+name: Test
 
 on: [pull_request]
 
 jobs:
   build:
+    name: Test
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -20,4 +21,3 @@ jobs:
       - name: Run Python unit tests
         run: |
           make test
-

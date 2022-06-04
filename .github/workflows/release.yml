@@ -1,4 +1,4 @@
-name: Releases
+name: Release
 
 on: 
   push:
@@ -6,12 +6,22 @@ on:
 
 jobs:
   release-new-package-version:
+    name: Release
     runs-on: ubuntu-latest
+    environment: nOpsDeployment
     permissions:
       contents: write
       packages: write
+      id-token: write
 
     steps:
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.NOPS_ROLE }}
+          role-session-name: GitHubActionsDeployCF
+          aws-region: us-west-2
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -30,6 +40,6 @@ jobs:
 
       - name: Release package
         run: |
-          ./release.sh
+          ./deploy_scripts/release.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
