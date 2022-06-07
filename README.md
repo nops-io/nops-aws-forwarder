@@ -32,3 +32,7 @@ If you can't install the Forwarder using the provided CloudFormation template, y
 ## Usage
 
 ## Support
+
+
+## Development
+- Run ./bump_version minor/major/main to add a new version
