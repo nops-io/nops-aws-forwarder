@@ -15,8 +15,7 @@ Forward event from AWS CT into nOps
 2. Fill in `pnOpsApiKey`, `pCTForwarderReleaseVersion`, `pCloudtrailBucketName`, . All other parameters are optional.
 3. Click **Create stack**, and wait for the creation to complete.
 4. Find the installed forwarder Lambda function under the stack's "Resources" tab with logical ID `rLambdaForwarder`.
-5. Set up [triggers](https://docs.aws.amazon.com/lambda/latest/dg/with-cloudtrail-example.html) to the installed Forwarder
-6. Repeat the above steps in another region if you operate in multiple AWS regions with single-region trail.
+5. Repeat the above steps in another region if you operate in multiple AWS regions with single-region trail.
 
 
 ### Manual
