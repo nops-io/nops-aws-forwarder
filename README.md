@@ -4,7 +4,7 @@ Forward event from AWS CT into nOps
 
 ## Prerequisites
 - [AWS Cloudtrail](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-a-trail-using-the-console-first-time.html) with s3 bucket for cloudtrail logs must be configured before deploying this stack. 
-- Region for AWS Cloudtrail and nOps-aws-forwarder should be same.
+- S3 bucket for AWS Cloudtrail, and nOps-aws-forwarder should be within the some Region.
 
 ## Installation
 
