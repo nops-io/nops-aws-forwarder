@@ -4,12 +4,19 @@ Description: "cloudformation template to deploy nOps lambda forwarder"
 Parameters: 
   pCTForwarderReleaseVersion:
     Type: String
-    Default: 1.0.6
+    Default: 1.0.7
     Description: nOps cloudtrail forwarder github release version.
   pnOpsApiKey:
     Type: String
     NoEcho: true
     Description: nOps api key.
+  pnOpsKmsAPIKey:
+    Type: String
+    NoEcho: true
+    Description: nOps API Key encrypted by KMS, requires KMS Key ID
+  pnOpsKmsKeyId:
+    Type: String
+    Description: Key ID use to decrypt the API Key equires KMS Key ID
   pCloudtrailBucketName:
     Type: String
     Description: S3 Bucket name which contains cloudtrail logs.
@@ -233,6 +240,8 @@ Resources:
         Variables:
           NOPS_API_KEY: !Ref pnOpsApiKey
           NOPS_LOG_LEVEL: 'INFO'
+          NOPS_KMS_API_KEY: !Ref pnOpsKmsKeyId
+          NOPS_KMS_KEY_ID: !Ref pnOpsKmsAPIKey
     DependsOn: 
       - rnopsLambdaForwarderExecutionRole
       - rTriggerZipCopier
