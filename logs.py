@@ -50,7 +50,12 @@ class NopsHTTPClient(object):
         # Resolve all the futures and log exceptions if any
         for future in as_completed(self._futures):
             try:
-                future.result()
+                result = future.result()
+                if result.status_code != 200:
+                    location = result.headers.get("Location")
+                    logger.exception(
+                        f"Exception: Invalid response, status code: {result.status_code}, location: {location}"
+                    )
             except Exception:
                 logger.exception("Exception while forwarding logs")
 
@@ -62,7 +67,9 @@ class NopsHTTPClient(object):
         """
         # FuturesSession returns immediately with a future object
         data = "[{}]".format(",".join(logs))
-        future = self._session.post(self._url, data, timeout=self._timeout, verify=self._ssl_validation)
+        future = self._session.post(
+            self._url, data, timeout=self._timeout, verify=self._ssl_validation, allow_redirects=False
+        )
         self._futures.append(future)
 
     def __enter__(self):

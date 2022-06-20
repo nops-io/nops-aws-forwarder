@@ -3,8 +3,10 @@ import logging
 import os
 
 from logs import forward_logs
+from parsing import generate_metadata
 from parsing import parse
 from settings import CT_EVENT_TYPES
+from settings import NOPS_FORWARDER_VERSION
 
 logger = logging.getLogger()
 logger.setLevel(logging.getLevelName(os.environ.get("NOPS_LOG_LEVEL", "INFO").upper()))
@@ -21,11 +23,21 @@ def lambda_handler(event, context):
     # For each line in S3 File
     # Send it to API Collector with api_key
     # if good can send it in batch
+    aws_account_number = context.invoked_function_arn.split(":")[4]
+
     if logger.isEnabledFor(logging.DEBUG):
         logger.debug(f"Received Event:{json.dumps(event)}")
+        logger.debug(f"Forwarder version: {NOPS_FORWARDER_VERSION}")
+        if "healthcheck" in event:
+            event = generate_metadata(context)
+            event["nopssource"] = "lambda_healthcheck"
+            forward_logs(
+                [event],
+                aws_account_number,
+            )
+            return {"message": "success", "healthcheck": "ok"}
 
     events = transform(parse(event, context))
-    aws_account_number = context.invoked_function_arn.split(":")[4]
 
     forward_logs(events, aws_account_number)
 
