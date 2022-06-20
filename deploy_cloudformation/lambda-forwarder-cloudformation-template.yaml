@@ -14,9 +14,6 @@ Parameters:
     Type: String
     NoEcho: true
     Description: nOps API Key encrypted by KMS, requires KMS Key ID
-  pnOpsKmsKeyId:
-    Type: String
-    Description: Key ID use to decrypt the API Key equires KMS Key ID
   pCloudtrailBucketName:
     Type: String
     Description: S3 Bucket name which contains cloudtrail logs.

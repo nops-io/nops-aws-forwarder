@@ -1,4 +1,5 @@
 ipdb
 pytest
 moto[s3]
+moto[kms]
 responses

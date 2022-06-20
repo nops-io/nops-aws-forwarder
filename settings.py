@@ -3,11 +3,9 @@ import logging
 import os
 
 import boto3
+import botocore.config
 
 logger = logging.getLogger()
-
-
-boto3_config = botocore.config.Config(connect_timeout=5, read_timeout=5, retries={"max_attempts": 2})
 
 
 def get_env_var(envvar, default, boolean=False):
@@ -53,21 +51,24 @@ if "NOPS_SKIP_SSL_VALIDATION" in os.environ:
     NOPS_SKIP_SSL_VALIDATION = os.environ["NOPS_SKIP_SSL_VALIDATION"].upper() == "TRUE"
 
 
-if (
-    "NOPS_KMS_API_KEY" in os.environ
-    and "NOPS_KMS_KEY_ID" in os.environ
-    and os.environ["NOPS_KMS_API_KEY"]
-    and os.environ["NOPS_KMS_KEY_ID"]
-):
-    ENCRYPTED_API_KEY = os.environ["NOPS_KMS_API_KEY"]
-    NOPS_API_KEY = boto3.client("kms", config=boto3_config).decrypt(
-        CiphertextBlob=base64.b64decode(ENCRYPTED_API_KEY), KeyId=os.environ["NOPS_KMS_KEY_ID"]
-    )["Plaintext"]
-    if type(NOPS_API_KEY) is bytes:
-        NOPS_API_KEY = NOPS_API_KEY.decode("utf-8")
+def get_api_key():
+    boto3_config = botocore.config.Config(
+        connect_timeout=5, read_timeout=5, retries={"max_attempts": 2}, region_name=os.environ.get("AWS_REGION")
+    )
+    api_key = ""
+    if "NOPS_KMS_API_KEY" in os.environ and os.environ["NOPS_KMS_API_KEY"]:
+        ENCRYPTED_API_KEY = os.environ["NOPS_KMS_API_KEY"]
+        api_key = boto3.client("kms", config=boto3_config).decrypt(
+            CiphertextBlob=base64.b64decode(bytes(ENCRYPTED_API_KEY, "utf-8"))
+        )["Plaintext"]
+        if type(api_key) is bytes:
+            api_key = api_key.decode("utf-8")
 
-elif "NOPS_API_KEY" in os.environ:
-    logger.debug("Fetching the API key from environment variable NOPS_API_KEY")
-    NOPS_API_KEY = os.environ["NOPS_API_KEY"]
+    elif "NOPS_API_KEY" in os.environ:
+        logger.debug("Fetching the API key from environment variable NOPS_API_KEY")
+        api_key = os.environ["NOPS_API_KEY"]
 
-NOPS_API_KEY = NOPS_API_KEY.strip()
+    return api_key.strip()
+
+
+NOPS_API_KEY = get_api_key()
