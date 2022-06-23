@@ -15,6 +15,7 @@ logger = logging.getLogger()
 
 
 NOPS_MAX_WORKERS = 20
+HAS_ERROR = 0
 
 
 class RetriableException(Exception):
@@ -53,6 +54,8 @@ class NopsHTTPClient(object):
                 result = future.result()
                 if result.status_code != 200:
                     location = result.headers.get("Location")
+                    global HAS_ERROR
+                    HAS_ERROR = 1
                     logger.exception(
                         f"Exception: Invalid response, status code: {result.status_code}, location: {location}"
                     )
@@ -184,3 +187,4 @@ def forward_logs(logs, aws_account_number):
             else:
                 if logger.isEnabledFor(logging.DEBUG):
                     logger.debug(f"Forwarded log batch: {json.dumps(batch)}")
+    return HAS_ERROR

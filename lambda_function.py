@@ -31,10 +31,12 @@ def lambda_handler(event, context):
         if "healthcheck" in event:
             event = generate_metadata(context)
             event["nopssource"] = "lambda_healthcheck"
-            forward_logs(
+            has_error = forward_logs(
                 [event],
                 aws_account_number,
             )
+            if has_error:
+                return {"message": "failed", "healthcheck": "failed"}
             return {"message": "success", "healthcheck": "ok"}
 
     events = transform(parse(event, context))
