@@ -4,7 +4,7 @@ Description: "cloudformation template to deploy nOps lambda forwarder"
 Parameters: 
   pCTForwarderReleaseVersion:
     Type: String
-    Default: 1.0.7
+    Default: 1.0.8
     Description: nOps cloudtrail forwarder github release version.
   pnOpsApiKey:
     Type: String
