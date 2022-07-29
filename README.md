@@ -29,11 +29,6 @@ If you can't install the Forwarder using the provided CloudFormation template, y
 4. Configure [triggers](https://docs.aws.amazon.com/lambda/latest/dg/with-cloudtrail-example.html).
 5. If you use KMS encrypted API key, please provide the access permission for lambda role for KMS Key
 
-## Upgrade
-
-## Usage
-
-## Support
 
 
 ## Development
